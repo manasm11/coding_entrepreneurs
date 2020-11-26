@@ -12,6 +12,8 @@ def send_email(message=None, subject=None, to_emails=None, from_name=None, verbo
     assert isinstance(subject, str), "'subject' not string" + _e
     assert isinstance(to_emails, list), "'to_emails' not list" + _e
     assert isinstance(to_emails[0], str), "'to_emails' elements not string"+_e
+    for email in to_emails:
+        assert "." in email and "@" in email, f"[-] {email} is invalid email"
     # ASSERTIONS END
     # Sorry for wrong indentation below, but I couldn't find a fix for this...
     email_message_template = f"""from: {from_name if from_name else username}"""+"""
@@ -47,5 +49,5 @@ if __name__ == "__main__":
         ],
         subject="Testing",
         from_name="Manas Mishra",
-        verbose=True
+        verbose=False
     )
